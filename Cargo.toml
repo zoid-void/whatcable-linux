@@ -1,0 +1,19 @@
+[package]
+name = "whatcable"
+version = "0.1.0"
+edition = "2021"
+description = "Linux CLI that tells you in plain English what each USB-C cable plugged into your machine can actually do."
+license = "MIT"
+
+[[bin]]
+name = "whatcable"
+path = "src/main.rs"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+opt-level = 3
+lto = true
+strip = true
