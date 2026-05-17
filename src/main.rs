@@ -1,4 +1,4 @@
-//! whatcable — Linux CLI that reports what each USB-C port can do.
+//! whatcable-linux — Linux CLI that reports what each USB-C port can do.
 //!
 //! Mirrors the macOS WhatCable CLI in spirit and flag set.
 
@@ -17,9 +17,9 @@ use std::process::ExitCode;
 use std::time::Duration;
 
 const HELP: &str = "\
-whatcable — what can this USB-C cable / port actually do? (Linux)
+whatcable-linux — what can this USB-C cable / port actually do? (Linux)
 
-Usage: whatcable [options]
+Usage: whatcable-linux [options]
 
 Options:
   --watch           Continuously monitor for changes (Ctrl+C to exit)
@@ -65,19 +65,19 @@ fn main() -> ExitCode {
                 i += 1;
                 let v = args.get(i).cloned().unwrap_or_default();
                 interval_secs = v.parse().unwrap_or_else(|_| {
-                    eprintln!("whatcable: bad --interval value: {}", v);
+                    eprintln!("whatcable-linux: bad --interval value: {}", v);
                     1
                 });
             }
             other if other.starts_with("--") || other.starts_with('-') => {
                 if !known.contains(other) {
-                    eprintln!("whatcable: unknown option {}", other);
+                    eprintln!("whatcable-linux: unknown option {}", other);
                     eprint!("{}", HELP);
                     return ExitCode::from(2);
                 }
             }
             _ => {
-                eprintln!("whatcable: unexpected argument {}", a);
+                eprintln!("whatcable-linux: unexpected argument {}", a);
                 return ExitCode::from(2);
             }
         }
@@ -93,7 +93,7 @@ fn main() -> ExitCode {
         match json::render(&snapshot, show_raw) {
             Ok(s) => println!("{}", s),
             Err(e) => {
-                eprintln!("whatcable: json encoding failed: {}", e);
+                eprintln!("whatcable-linux: json encoding failed: {}", e);
                 return ExitCode::FAILURE;
             }
         }
@@ -112,7 +112,7 @@ fn run_watch(as_json: bool, show_raw: bool, interval_secs: u64) -> ExitCode {
             match json::render(&snapshot, show_raw) {
                 Ok(s) => s,
                 Err(e) => {
-                    eprintln!("whatcable: json encoding failed: {}", e);
+                    eprintln!("whatcable-linux: json encoding failed: {}", e);
                     std::thread::sleep(Duration::from_secs(interval_secs));
                     continue;
                 }
@@ -128,7 +128,7 @@ fn run_watch(as_json: bool, show_raw: bool, interval_secs: u64) -> ExitCode {
             } else {
                 // Clear screen + home cursor, then redraw with timestamp.
                 let _ = write!(handle, "\x1b[2J\x1b[H");
-                let _ = writeln!(handle, "whatcable --watch · {}\n", current_timestamp());
+                let _ = writeln!(handle, "whatcable-linux --watch · {}\n", current_timestamp());
                 let _ = write!(handle, "{}", output);
             }
             let _ = handle.flush();

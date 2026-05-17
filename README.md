@@ -1,4 +1,4 @@
-# whatcable (Linux)
+# whatcable-linux
 
 > **What can this USB-C cable / port actually do?**
 
@@ -16,20 +16,28 @@ reading Linux sysfs instead of macOS IOKit.
 Requires Rust (1.74+) and a recent Linux kernel (6.1+ recommended) with
 the USB Type-C class populated.
 
+From crates.io:
+
+```bash
+cargo install whatcable-linux
+```
+
+From a source checkout:
+
 ```bash
 cargo build --release
-sudo install -m 755 target/release/whatcable /usr/local/bin/whatcable
+sudo install -m 755 target/release/whatcable-linux /usr/local/bin/whatcable-linux
 ```
 
 ## Usage
 
 ```bash
-whatcable                # human-readable summary of every USB-C port
-whatcable --json         # structured JSON, pipe into jq
-whatcable --watch        # stream updates as cables come and go (Ctrl+C to exit)
-whatcable --raw          # include underlying sysfs attributes
-whatcable --version
-whatcable --help
+whatcable-linux                # human-readable summary of every USB-C port
+whatcable-linux --json         # structured JSON, pipe into jq
+whatcable-linux --watch        # stream updates as cables come and go (Ctrl+C to exit)
+whatcable-linux --raw          # include underlying sysfs attributes
+whatcable-linux --version
+whatcable-linux --help
 ```
 
 ### Example from this computer
@@ -105,7 +113,7 @@ Per port, in plain English:
 
 ## How it works
 
-`whatcable` reads four families of Linux sysfs:
+`whatcable-linux` reads four families of Linux sysfs:
 
 | Sysfs path | What it gives us |
 | --- | --- |

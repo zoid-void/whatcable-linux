@@ -1,12 +1,16 @@
 [package]
-name = "whatcable"
+name = "whatcable-linux"
 version = "0.1.0"
 edition = "2021"
+rust-version = "1.74"
 description = "Linux CLI that tells you in plain English what each USB-C cable plugged into your machine can actually do."
 license = "MIT"
+repository = "https://github.com/zoid-void/whatcable-linux"
+keywords = ["usb-c", "type-c", "linux", "cli", "sysfs"]
+categories = ["command-line-utilities", "hardware-support"]
 
 [[bin]]
-name = "whatcable"
+name = "whatcable-linux"
 path = "src/main.rs"
 
 [dependencies]
